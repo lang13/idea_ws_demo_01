@@ -1,0 +1,55 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>WS</title>
+    <script th:src="@{js/sockjs.min.js}"></script>
+    <script th:src="@{js/stomp.js}"></script>
+    <script th:src="@{js/jquery-3.1.1.js}"></script>
+    <script>
+        var stompClient = null;
+        //连接WebSocket
+        function connect() {
+            var socket = new SockJS('/WebSocket');
+            stompClient = Stomp.over(socket);
+
+            //连接
+            stompClient.connect({},function (frame) {
+                console.info("成功连接: " + frame);
+                //客户端向服务端发送信息
+                stompClient.send("/welcome",{},"前端向后台发送的信息...");
+
+                //客户端接收到后台发送的信息...
+                stompClient.subscribe("/topic/getting_01",function (data) {
+                    alert("接收到的数据: " + data)
+                })
+            })
+        }
+        function connect1() {
+            //声明stompClient对象,但未进行连接
+            var socket = new SockJS("/WebSocket");
+            stompClient = Stomp.over(socket);
+
+            //尝试连接ws
+            //这里方法的{}不能省
+            stompClient.connect({},function (frame) {
+                console.info("成功连接ws: " + frame);
+
+                /**
+                 * 发送和接收信息的方法必须在connect里面
+                 */
+                //客户端向后台发送消息
+                //这里的{}不能省
+                stompClient.send("/welcome1",{},"前端向后台发送的信息...");
+                //客户端收到后台发布的消息
+                stompClient.subscribe("/user/topic/getting_02",function (data) {
+                    alert("服务器返回客户端的消息: " + data)
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <button onclick="connect();">连接</button>
+    <button onclick="connect1()">SendToUser</button>
+</body>
+</html>
