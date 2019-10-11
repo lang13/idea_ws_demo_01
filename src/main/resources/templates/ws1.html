@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+    <script>
+        //连接的方法
+        var websocket = null;
+        function subConnect() {
+            websocket = new WebSocket("ws://localhost:8080/WebSocket");
+
+            websocket.onopen = function (ev) {
+                console.info("成功连接ws: " + ev);
+            }
+
+            //接收信息的onmessage必须在connect里面
+            websocket.onmessage = function (event) {
+                console.info("接收到的信息: " + event.data)
+            }
+        }
+
+        //发送信息的方法
+        function subSend(event) {
+            var text = document.getElementById("text").value;
+            websocket.send(text);
+        }
+
+    </script>
+</head>
+<body>
+<button onclick="subConnect()">onMessage方式连接WS</button><br></br>
+    <input type="text" id="text"></input><button onclick="subSend();">send</button>
+</body>
+</html>

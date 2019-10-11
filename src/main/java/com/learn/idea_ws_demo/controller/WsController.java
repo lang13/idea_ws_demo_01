@@ -24,4 +24,8 @@ public class WsController {
         System.out.println("handler_02收到的信息: " + msg);
         return "这是handler_02收到的信息: " + msg;
     }
+
+    public String handler_03(){
+        return "";
+    }
 }

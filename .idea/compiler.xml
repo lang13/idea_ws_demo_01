@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="idea_ws_demo_01" options="" />
+      <module name="idea_ws_demo_01" options="-bootclasspath D:/JDK/jre/lib/rt.jar" />
     </option>
   </component>
 </project>

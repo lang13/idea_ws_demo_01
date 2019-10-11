@@ -17,15 +17,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         //跳转到ws.html
         registry.addViewController("/ws").setViewName("/ws");
+        registry.addViewController("/ws1").setViewName("/ws1");
+        registry.addViewController("/cuan").setViewName("/cuan");
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(interceptConfig())
-                .addPathPatterns("/**")
-                //放行的请求
-                .excludePathPatterns("/login");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(interceptConfig())
+//                .addPathPatterns("/**")
+//                //放行的请求
+//                .excludePathPatterns("/login")
+//                .excludePathPatterns("/cuan");
+//    }
 
     @Bean
     public InterceptConfig interceptConfig(){
