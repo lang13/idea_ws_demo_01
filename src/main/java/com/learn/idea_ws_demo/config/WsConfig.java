@@ -6,6 +6,8 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+//该配置文件是WbController的配置文件
+//与onMessage式的WebSocket无关
 @Configuration
 @EnableWebSocketMessageBroker
 public class WsConfig extends AbstractWebSocketMessageBrokerConfigurer {
